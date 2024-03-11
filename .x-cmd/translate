@@ -1,0 +1,14 @@
+# shellcheck shell=dash
+
+(
+    fp="$(x wsroot)/$1"
+
+    if [ ! -f "$fp" ]; then
+        echo "File $fp does not exist"
+        return 1
+    fi
+
+    dist="$(printf "%s" "$fp" | sed 's/cn/en/')" || return 1
+    x touch "$dist"
+    < "$fp" x txt en > "$dist"
+)
